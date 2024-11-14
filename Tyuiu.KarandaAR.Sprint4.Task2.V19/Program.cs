@@ -22,18 +22,31 @@ namespace Tyuiu.KarandaAR.Sprint4.Task2.V19
 
             DataService dataService = new DataService();
 
-            int lenght = 14;
-            int[] array = new int[lenght];
+            int[] array = GenerateRandomArray(14, 4, 9);
 
-            Console.WriteLine("Введите значения:");
-
-            for (int i = 0; i < lenght; i++)
+            // Вывод массива
+            Console.WriteLine("Сгенерированный массив:");
+            foreach (int element in array)
             {
-                Console.Write($"{i + 1}. ");
-                array[i] = Convert.ToInt32(Console.ReadLine());
+                Console.Write(element + " ");
             }
+
+            Console.WriteLine();
 
             Console.WriteLine($"Сумма равна: {dataService.Calculate(array)}");
         }
+
+        public static int[] GenerateRandomArray(int length, int minValue, int maxValue)
+    {
+        int[] array = new int[length];
+        Random rand = new Random();
+
+        for (int i = 0; i < length; i++)
+        {
+            array[i] = rand.Next(minValue, maxValue + 1);
+        }
+
+        return array;
+    }
     }
 }

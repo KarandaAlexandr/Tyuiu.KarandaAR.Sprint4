@@ -23,17 +23,16 @@ namespace Tyuiu.KarandaAR.Sprint4.Task5.V11
 
             DataService dataService = new DataService();
 
-            int[,] matrix = {
-                { -3, 1, 0, -6, 2 },
-                { -7, -2, 1, 2, -4 },
-                { 2, -5, -3, 1, 0 },
-                { -6, 2, -1, -3, 2 },
-                { 1, 0, -7, 2, -4 }
-            };
+            Console.Write("Введите количество строк: ");
+            int rows = Convert.ToInt32(Console.ReadLine());
 
-            // Вывод изначальной матрицы
-            Console.WriteLine("Исходный массив:");
+            Console.Write("Введите количество столбцов: ");
+            int columns = Convert.ToInt32(Console.ReadLine());
+
+            int[,] matrix = GenerateRandomArray(rows, columns, -7, 2); // Диапазон от -7 до 2
+            Console.WriteLine("Сгенерированный массив:");
             PrintMatrix(matrix);
+
 
             // Обработка массива
             matrix = dataService.Calculate(matrix);
@@ -41,6 +40,7 @@ namespace Tyuiu.KarandaAR.Sprint4.Task5.V11
             // Вывод обработанной матрицы
             Console.WriteLine("\nОбработанный массив:");
             PrintMatrix(matrix);
+
 
             // Функция для вывода матрицы в консоль
             void PrintMatrix(int[,] array)
@@ -53,6 +53,21 @@ namespace Tyuiu.KarandaAR.Sprint4.Task5.V11
                     }
                     Console.WriteLine();
                 }
+            }
+
+            static int[,] GenerateRandomArray(int rows, int columns, int minValue, int maxValue)
+            {
+                int[,] array = new int[rows, columns];
+                Random rand = new Random();
+
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < columns; j++)
+                    {
+                        array[i, j] = rand.Next(minValue, maxValue + 1);
+                    }
+                }
+                return array;
             }
         }
     }
